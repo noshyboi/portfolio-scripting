@@ -1,47 +1,8 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find header row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Roblox Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -51,62 +12,40 @@
 <body>
   <div id="root"></div>
 
+  <!-- React + Babel -->
   <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
 
-  <script type="text/babel" data-presets="react,typescript">
-    const Project = ({ title, description, link }) => {
-      return (
-        <div className="bg-white shadow-lg hover:shadow-xl transition rounded-2xl p-6">
-          <h3 className="text-xl font-semibold mb-2">{title}</h3>
-          <p className="mb-4 text-sm text-gray-600">{description}</p>
-          {link ? (
-            <a
-              href={link}
-              className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-              rel="noopener noreferrer"
-              target="_blank"
-              aria-label={`View ${title} project`}
-            >
-              View Project
-            </a>
-          ) : (
-            <span className="inline-block px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed">
-              Project Unavailable
-            </span>
-          )}
-        </div>
-      );
-    };
+  <script type="text/babel" data-presets="react">
+    const Project = ({ title, description, link }) => (
+      <div className="bg-white shadow-lg hover:shadow-xl transition rounded-2xl p-6">
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="mb-4 text-sm text-gray-600">{description}</p>
+        {link ? (
+          <a
+            href={link}
+            className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+          </a>
+        ) : (
+          <span className="inline-block px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed">
+            Project Unavailable
+          </span>
+        )}
+      </div>
+    );
 
     const App = () => {
       const projects = [
-        {
-          title: "TPS Gun System",
-          description: "A unique gun system used in third person.",
-          link: "",
-        },
-        {
-          title: "Payload Framework",
-          description: "Payload players move to separate objectives with intelligent pathfinding.",
-          link: "",
-        },
-        {
-          title: "Rally System",
-          description: "Comprehensive UI designed to manage players into separate squads ready for deployments to separate games.",
-          link: "",
-        },
-        {
-          title: "Custom Duels Inspired Arena",
-          description: "Players stand on pads to enter a combat arena. Customisable health, weapon choice, winscore.",
-          link: "",
-        },
-        {
-          title: "Custom Roblox Chat",
-          description: "Designed to combat latency related to default Roblox chat. Customisable chat tags and more.",
-          link: "",
-        },
+        { title: "TPS Gun System", description: "A unique gun system used in third person.", link: "" },
+        { title: "Payload Framework", description: "Payload players move to separate objectives with intelligent pathfinding.", link: "" },
+        { title: "Rally System", description: "Comprehensive UI designed to manage players into separate squads ready for deployments to separate games.", link: "" },
+        { title: "Custom Duels Inspired Arena", description: "Players stand on pads to enter a combat arena. Customisable health, weapon choice, winscore.", link: "" },
+        { title: "Custom Roblox Chat", description: "Designed to combat latency related to default Roblox chat. Customisable chat tags and more.", link: "" },
       ];
 
       return (
@@ -114,14 +53,14 @@
           {/* Header */}
           <header className="p-6 bg-white shadow-md flex justify-between items-center">
             <h1 className="text-2xl font-bold">Scripting Portfolio</h1>
-            <nav className="flex gap-4" aria-label="Main navigation">
-              <a href="#projects" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">Projects</a>
-              <a href="#about" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">About</a>
-              <a href="#contact" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">Contact</a>
+            <nav className="flex gap-4">
+              <a href="#projects" className="hover:text-indigo-600">Projects</a>
+              <a href="#about" className="hover:text-indigo-600">About</a>
+              <a href="#contact" className="hover:text-indigo-600">Contact</a>
             </nav>
           </header>
 
-          {/* Hero Section */}
+          {/* Hero */}
           <section className="text-center py-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
             <h2 className="text-4xl font-bold mb-4">Hi, I’m a Roblox Scripter 👋</h2>
             <p className="max-w-xl mx-auto text-lg">I specialize in creating advanced Roblox systems, using Lua.</p>
@@ -129,9 +68,7 @@
 
           {/* Projects */}
           <section id="projects" className="p-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {projects.map((proj) => (
-              <Project key={proj.title} {...proj} />
-            ))}
+            {projects.map((proj) => <Project key={proj.title} {...proj} />)}
           </section>
 
           {/* About */}
@@ -146,191 +83,9 @@
           {/* Contact */}
           <section id="contact" className="p-10 bg-gray-100 text-center">
             <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-            <div className="flex justify-center gap-6">
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none"
-                aria-label="Visit my GitHub profile"
-              >
-                GitHub
-              </a>
-            </div>
-          </section>
-
-          {/* Footer */}
-          <footer className="p-6 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} noshy — Roblox Scripting Portfolio
-          </footer>
-        </div>
-      );
-    };
-
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
-  </script>
-</body>
-</html>
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find header row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-</script>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Roblox Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html { scroll-behavior: smooth; }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
-
-  <script type="text/babel" data-presets="react,typescript">
-    const Project = ({ title, description, link }) => {
-      return (
-        <div className="bg-white shadow-lg hover:shadow-xl transition rounded-2xl p-6">
-          <h3 className="text-xl font-semibold mb-2">{title}</h3>
-          <p className="mb-4 text-sm text-gray-600">{description}</p>
-          {link ? (
-            <a
-              href={link}
-              className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-              rel="noopener noreferrer"
-              target="_blank"
-              aria-label={`View ${title} project`}
-            >
-              View Project
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600">
+              GitHub
             </a>
-          ) : (
-            <span className="inline-block px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed">
-              Project Unavailable
-            </span>
-          )}
-        </div>
-      );
-    };
-
-    const App = () => {
-      const projects = [
-        {
-          title: "TPS Gun System",
-          description: "A unique gun system used in third person.",
-          link: "",
-        },
-        {
-          title: "Payload Framework",
-          description: "Payload players move to separate objectives with intelligent pathfinding.",
-          link: "",
-        },
-        {
-          title: "Rally System",
-          description: "Comprehensive UI designed to manage players into separate squads ready for deployments to separate games.",
-          link: "",
-        },
-        {
-          title: "Custom Duels Inspired Arena",
-          description: "Players stand on pads to enter a combat arena. Customisable health, weapon choice, winscore.",
-          link: "",
-        },
-        {
-          title: "Custom Roblox Chat",
-          description: "Designed to combat latency related to default Roblox chat. Customisable chat tags and more.",
-          link: "",
-        },
-      ];
-
-      return (
-        <div className="bg-gray-50 text-gray-800 min-h-screen">
-          {/* Header */}
-          <header className="p-6 bg-white shadow-md flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Scripting Portfolio</h1>
-            <nav className="flex gap-4" aria-label="Main navigation">
-              <a href="#projects" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">Projects</a>
-              <a href="#about" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">About</a>
-              <a href="#contact" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">Contact</a>
-            </nav>
-          </header>
-
-          {/* Hero Section */}
-          <section className="text-center py-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
-            <h2 className="text-4xl font-bold mb-4">Hi, I’m a Roblox Scripter 👋</h2>
-            <p className="max-w-xl mx-auto text-lg">I specialize in creating advanced Roblox systems, using Lua.</p>
-          </section>
-
-          {/* Projects */}
-          <section id="projects" className="p-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {projects.map((proj) => (
-              <Project key={proj.title} {...proj} />
-            ))}
-          </section>
-
-          {/* About */}
-          <section id="about" className="p-10 max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">About Me</h2>
-            <p className="text-gray-700 text-lg">
-              I’ve been scripting in Roblox for over 4 years, focusing on performance, optimization, and engaging gameplay
-              features. My goal is to bring creative ideas to life and help games stand out.
-            </p>
-          </section>
-
-          {/* Contact */}
-          <section id="contact" className="p-10 bg-gray-100 text-center">
-            <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-            <div className="flex justify-center gap-6">
-              <a
-                href="https://github.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none"
-                aria-label="Visit my GitHub profile"
-              >
-                GitHub
-              </a>
-            </div>
           </section>
 
           {/* Footer */}
