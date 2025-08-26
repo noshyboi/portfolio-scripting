@@ -91,18 +91,29 @@
     const App = () => {
       const projects = [
         {
-          title: "Custom Admin Commands",
-          description: "A full suite of custom admin commands scripted in Lua for Roblox games.",
-          link: "https://github.com/yourusername/admin-commands",
+          title: "TPS Gun System",
+          description: "A unique gun system used in third person.",
+          link: "",
         },
         {
-          title: "Tycoon Framework",
-          description: "A modular tycoon system with leaderboards and save data integration.",
-          link: "https://github.com/yourusername/tycoon-framework",
+          title: "Payload Framework",
+          description: "Payload players move to seperate objectives with intelligent pathfinding.",
+          link: "",
         },
         {
-          title: "Combat System",
-          description: "An advanced melee + ranged combat system with hit detection and animations.",
+          title: "Rally System",
+          description: "Comprehensive UI designed to manage players into seperate squads ready for deployments to seperate games.",
+          link: "",
+        },
+               {
+          title: "Custom Duels inspired arena",
+          description: "Players stand on pads to enter a combat arena. Customisable health, weapon choice, winscore.",
+          link: "",
+        },
+                },
+               {
+          title: "Custom Roblox Chat",
+          description: "Designed to combat latency related to default roblox chat. Customisable chat tags and more.",
           link: "",
         },
       ];
@@ -111,7 +122,7 @@
         <div className="bg-gray-50 text-gray-800 min-h-screen">
           {/* Header */}
           <header className="p-6 bg-white shadow-md flex justify-between items-center">
-            <h1 className="text-2xl font-bold">My Roblox Portfolio</h1>
+            <h1 className="text-2xl font-bold">Scripting Portfolio</h1>
             <nav className="flex gap-4" aria-label="Main navigation">
               <a href="#projects" className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none">
                 Projects
@@ -129,7 +140,7 @@
           <section className="text-center py-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
             <h2 className="text-4xl font-bold mb-4">Hi, I’m a Roblox Scripter 👋</h2>
             <p className="max-w-xl mx-auto text-lg">
-              I specialize in creating advanced Roblox systems, from combat to tycoon mechanics, using Lua.
+              I specialize in creating advanced Roblox systems, using Lua.
             </p>
           </section>
 
@@ -144,7 +155,7 @@
           <section id="about" className="p-10 max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">About Me</h2>
             <p className="text-gray-700 text-lg">
-              I’ve been scripting in Roblox for 3 years, focusing on performance, optimization, and engaging gameplay
+              I’ve been scripting in Roblox for over 4 years, focusing on performance, optimization, and engaging gameplay
               features. My goal is to bring creative ideas to life and help games stand out.
             </p>
           </section>
@@ -162,19 +173,12 @@
               >
                 GitHub
               </a>
-              <a
-                href="mailto:youremail@example.com"
-                className="hover:text-indigo-600 focus:text-indigo-600 focus:outline-none"
-                aria-label="Send me an email"
-              >
-                Email
-              </a>
             </div>
           </section>
 
           {/* Footer */}
           <footer className="p-6 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Your Name — Roblox Scripting Portfolio
+            © {new Date().getFullYear()} noshy — Roblox Scripting Portfolio
           </footer>
         </div>
       );
