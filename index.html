@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,9 +7,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
   <div id="root"></div>
 
   <!-- React + Babel -->
@@ -19,20 +30,20 @@
 
   <script type="text/babel" data-presets="react">
     const Project = ({ title, description, link }) => (
-      <div className="bg-white shadow-lg hover:shadow-xl transition rounded-2xl p-6">
+      <div className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition rounded-2xl p-6 fade-in">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="mb-4 text-sm text-gray-600">{description}</p>
+        <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{description}</p>
         {link ? (
           <a
             href={link}
-            className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+            className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
             target="_blank"
             rel="noopener noreferrer"
           >
             View Project
           </a>
         ) : (
-          <span className="inline-block px-4 py-2 bg-gray-300 text-gray-600 rounded-lg cursor-not-allowed">
+          <span className="inline-block px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed">
             Project Unavailable
           </span>
         )}
@@ -40,30 +51,54 @@
     );
 
     const App = () => {
+      const [darkMode, setDarkMode] = React.useState(
+        localStorage.getItem("theme") === "dark"
+      );
+
+      React.useEffect(() => {
+        if (darkMode) {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        }
+      }, [darkMode]);
+
       const projects = [
         { title: "TPS Gun System", description: "A unique gun system used in third person.", link: "" },
-        { title: "Payload Framework", description: "Payload players move to separate objectives with intelligent pathfinding.", link: "" },
-        { title: "Rally System", description: "Comprehensive UI designed to manage players into separate squads ready for deployments to separate games.", link: "" },
+        { title: "Payload Framework", description: "Payload players move to separate objectives with intelligent pathfinding.", link: "https://youtu.be/0msNi_Xs4qg" },
+        { title: "Rally System", description: "Comprehensive UI designed to manage players into separate squads ready for deployments to separate games.", link: "https://youtu.be/lapJBFa7LLY" },
         { title: "Custom Duels Inspired Arena", description: "Players stand on pads to enter a combat arena. Customisable health, weapon choice, winscore.", link: "" },
-        { title: "Custom Roblox Chat", description: "Designed to combat latency related to default Roblox chat. Customisable chat tags and more.", link: "" },
+        { title: "Custom Roblox Chat", description: "Designed to combat latency related to default Roblox chat. Customisable chat tags and more.", link: "https://youtu.be/W1BtIkhCG98" },
+        { title: "Placement System", description: "Free placement system, inspired by Roblox Bedwars.", link: "https://youtu.be/CJ0tCs2MZ8w" },
       ];
 
       return (
-        <div className="bg-gray-50 text-gray-800 min-h-screen">
+        <div>
           {/* Header */}
-          <header className="p-6 bg-white shadow-md flex justify-between items-center">
+          <header className="p-6 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center transition">
             <h1 className="text-2xl font-bold">Scripting Portfolio</h1>
-            <nav className="flex gap-4">
-              <a href="#projects" className="hover:text-indigo-600">Projects</a>
-              <a href="#about" className="hover:text-indigo-600">About</a>
-              <a href="#contact" className="hover:text-indigo-600">Contact</a>
-            </nav>
+            <div className="flex gap-6 items-center">
+              <nav className="flex gap-4">
+                <a href="#projects" className="hover:text-indigo-600">Projects</a>
+                <a href="#about" className="hover:text-indigo-600">About</a>
+                <a href="#contact" className="hover:text-indigo-600">Contact</a>
+              </nav>
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition"
+                title="Toggle Dark Mode"
+              >
+                {darkMode ? "🌙" : "☀️"}
+              </button>
+            </div>
           </header>
 
           {/* Hero */}
-          <section className="text-center py-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
-            <h2 className="text-4xl font-bold mb-4">Hi, I’m a Roblox Scripter 👋</h2>
-            <p className="max-w-xl mx-auto text-lg">I specialize in creating advanced Roblox systems, using Lua.</p>
+          <section className="text-center py-24 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white animate-pulse-slow">
+            <h2 className="text-5xl font-extrabold mb-4">Hi, I’m a Roblox Scripter 👋</h2>
+            <p className="max-w-xl mx-auto text-lg opacity-90">I specialize in creating advanced Roblox systems, using Lua.</p>
           </section>
 
           {/* Projects */}
@@ -72,24 +107,22 @@
           </section>
 
           {/* About */}
-          <section id="about" className="p-10 max-w-4xl mx-auto text-center">
+          <section id="about" className="p-10 max-w-4xl mx-auto text-center fade-in">
             <h2 className="text-3xl font-bold mb-4">About Me</h2>
-            <p className="text-gray-700 text-lg">
+            <p className="text-lg text-gray-700 dark:text-gray-300">
               I’ve been scripting in Roblox for over 4 years, focusing on performance, optimization, and engaging gameplay
               features. My goal is to bring creative ideas to life and help games stand out.
             </p>
           </section>
 
           {/* Contact */}
-          <section id="contact" className="p-10 bg-gray-100 text-center">
+          <section id="contact" className="p-10 bg-gray-100 dark:bg-gray-800 text-center fade-in">
             <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600">
-              GitHub
-            </a>
+            <p className="text-xl font-semibold">Discord: <span className="text-indigo-500">noshy556</span></p>
           </section>
 
           {/* Footer */}
-          <footer className="p-6 text-center text-gray-500 text-sm">
+          <footer className="p-6 text-center text-gray-500 dark:text-gray-400 text-sm">
             © {new Date().getFullYear()} noshy — Roblox Scripting Portfolio
           </footer>
         </div>
