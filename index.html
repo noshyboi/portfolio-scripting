@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Roblox Portfolio</title>
+  <title>Roblox Scripting Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
@@ -40,11 +40,11 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            View Project
+            View Showcase
           </a>
         ) : (
           <span className="inline-block px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed">
-            Project Unavailable
+            Demo Unavailable
           </span>
         )}
       </div>
@@ -66,22 +66,23 @@
       }, [darkMode]);
 
       const projects = [
-        { title: "TPS Gun System", description: "A unique gun system used in third person.", link: "" },
-        { title: "Payload Framework", description: "Payload players move to separate objectives with intelligent pathfinding.", link: "https://youtu.be/0msNi_Xs4qg" },
-        { title: "Rally System", description: "Comprehensive UI designed to manage players into separate squads ready for deployments to separate games.", link: "https://youtu.be/lapJBFa7LLY" },
-        { title: "Custom Duels Inspired Arena", description: "Players stand on pads to enter a combat arena. Customisable health, weapon choice, winscore.", link: "" },
-        { title: "Custom Roblox Chat", description: "Designed to combat latency related to default Roblox chat. Customisable chat tags and more.", link: "https://youtu.be/W1BtIkhCG98" },
-        { title: "Placement System", description: "Free placement system, inspired by Roblox Bedwars.", link: "https://youtu.be/CJ0tCs2MZ8w" },
+        { title: "TPS Gun System", description: "An advanced third-person weapon framework with smooth animations, precise hit detection, and scalability for competitive gameplay.", link: "" },
+        { title: "Payload Framework", description: "Dynamic payload system with intelligent pathfinding and balanced mechanics, ideal for objective-based team games.", link: "https://youtu.be/0msNi_Xs4qg" },
+        { title: "Rally System", description: "Squad-based deployment framework with polished UI, allowing players to organize into units and seamlessly join linked games.", link: "https://youtu.be/lapJBFa7LLY" },
+        { title: "Custom Duels Arena", description: "Highly configurable PvP arena system with customizable health, weapons, scoring, and fast-paced queue management.", link: "" },
+        { title: "Custom Roblox Chat", description: "Optimized chat replacement designed to reduce latency, support role-based tags, and provide flexible moderation tools.", link: "https://youtu.be/W1BtIkhCG98" },
+        { title: "Placement System", description: "Free-form building system inspired by Roblox Bedwars, with grid-snapping, validation, and efficient network handling.", link: "https://youtu.be/CJ0tCs2MZ8w" },
       ];
 
       return (
         <div>
           {/* Header */}
           <header className="p-6 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center transition">
-            <h1 className="text-2xl font-bold">Scripting Portfolio</h1>
+            <h1 className="text-2xl font-bold">Roblox Scripting Portfolio</h1>
             <div className="flex gap-6 items-center">
               <nav className="flex gap-4">
                 <a href="#projects" className="hover:text-indigo-600">Projects</a>
+                <a href="#services" className="hover:text-indigo-600">Services</a>
                 <a href="#about" className="hover:text-indigo-600">About</a>
                 <a href="#contact" className="hover:text-indigo-600">Contact</a>
               </nav>
@@ -96,9 +97,11 @@
           </header>
 
           {/* Hero */}
-          <section className="text-center py-24 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white animate-pulse-slow">
-            <h2 className="text-5xl font-extrabold mb-4">Hi, I’m a Roblox Scripter 👋</h2>
-            <p className="max-w-xl mx-auto text-lg opacity-90">I specialize in creating advanced Roblox systems, using Lua.</p>
+          <section className="text-center py-24 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white">
+            <h2 className="text-5xl font-extrabold mb-4">Building High-Quality Roblox Systems</h2>
+            <p className="max-w-xl mx-auto text-lg opacity-90">
+              I specialize in creating scalable, optimized, and engaging gameplay systems for Roblox experiences.
+            </p>
           </section>
 
           {/* Projects */}
@@ -106,19 +109,39 @@
             {projects.map((proj) => <Project key={proj.title} {...proj} />)}
           </section>
 
+          {/* Services */}
+          <section id="services" className="p-10 max-w-5xl mx-auto text-center fade-in">
+            <h2 className="text-3xl font-bold mb-6">Services I Offer</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+                <h3 className="text-xl font-semibold mb-2">Custom Systems</h3>
+                <p>From gun mechanics to progression systems, I build efficient frameworks tailored to your game.</p>
+              </div>
+              <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+                <h3 className="text-xl font-semibold mb-2">Game Optimization</h3>
+                <p>Performance tuning and code refactoring to ensure smooth gameplay for all devices.</p>
+              </div>
+              <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+                <h3 className="text-xl font-semibold mb-2">UI & UX Systems</h3>
+                <p>Interactive and modern UI solutions that enhance the player experience.</p>
+              </div>
+            </div>
+          </section>
+
           {/* About */}
           <section id="about" className="p-10 max-w-4xl mx-auto text-center fade-in">
             <h2 className="text-3xl font-bold mb-4">About Me</h2>
             <p className="text-lg text-gray-700 dark:text-gray-300">
-              I’ve been scripting in Roblox for over 4 years, focusing on performance, optimization, and engaging gameplay
-              features. My goal is to bring creative ideas to life and help games stand out.
+              I’ve been scripting in Roblox for 4+ years, focusing on performance, clean code, and creative gameplay systems. 
+              My goal is to help developers bring ambitious projects to life with systems that are both reliable and fun.
             </p>
           </section>
 
           {/* Contact */}
           <section id="contact" className="p-10 bg-gray-100 dark:bg-gray-800 text-center fade-in">
             <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-            <p className="text-xl font-semibold">Discord: <span className="text-indigo-500">noshy556</span></p>
+            <p className="text-xl">📩 Discord: <span className="text-indigo-500 font-semibold">noshy556</span></p>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">Let’s discuss your project ideas — I’m available for commissions and collaborations.</p>
           </section>
 
           {/* Footer */}
