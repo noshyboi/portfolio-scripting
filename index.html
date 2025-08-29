@@ -3,157 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roblox Scripting Portfolio</title>
+  <title>Roblox Scripting Portfolio | noshy</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.8s ease forwards;
-    }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s ease forwards; }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500">
   <div id="root"></div>
 
   <!-- React + Babel -->
-  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
 
-  <script type="text/babel" data-presets="react">
-    const Project = ({ title, description, link }) => (
-      <div className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition rounded-2xl p-6 fade-in">
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">{description}</p>
-        {link ? (
-          <a
-            href={link}
-            className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Showcase
-          </a>
-        ) : (
-          <span className="inline-block px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed">
-            Demo Unavailable
-          </span>
-        )}
-      </div>
-    );
-
-    const App = () => {
-      const [darkMode, setDarkMode] = React.useState(
-        localStorage.getItem("theme") === "dark"
-      );
-
-      React.useEffect(() => {
-        if (darkMode) {
-          document.documentElement.classList.add("dark");
-          localStorage.setItem("theme", "dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-          localStorage.setItem("theme", "light");
-        }
-      }, [darkMode]);
-
-      const projects = [
-        { title: "TPS Gun System", description: "An advanced third-person weapon framework with smooth animations, precise hit detection, and scalability for competitive gameplay.", link: "" },
-        { title: "Payload Framework", description: "Dynamic payload system with intelligent pathfinding and balanced mechanics, ideal for objective-based team games.", link: "https://youtu.be/0msNi_Xs4qg" },
-        { title: "Rally System", description: "Squad-based deployment framework with polished UI, allowing players to organize into units and seamlessly join linked games.", link: "https://youtu.be/lapJBFa7LLY" },
-        { title: "Custom Duels Arena", description: "Highly configurable PvP arena system with customizable health, weapons, scoring, and fast-paced queue management.", link: "" },
-        { title: "Custom Roblox Chat", description: "Optimized chat replacement designed to reduce latency, support role-based tags, and provide flexible moderation tools.", link: "https://youtu.be/W1BtIkhCG98" },
-        { title: "Placement System", description: "Free-form building system inspired by Roblox Bedwars, with grid-snapping, validation, and efficient network handling.", link: "https://youtu.be/CJ0tCs2MZ8w" },
-      ];
-
-      return (
-        <div>
-          {/* Header */}
-          <header className="p-6 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center transition">
-            <h1 className="text-2xl font-bold">Roblox Scripting Portfolio</h1>
-            <div className="flex gap-6 items-center">
-              <nav className="flex gap-4">
-                <a href="#projects" className="hover:text-indigo-600">Projects</a>
-                <a href="#services" className="hover:text-indigo-600">Services</a>
-                <a href="#about" className="hover:text-indigo-600">About</a>
-                <a href="#contact" className="hover:text-indigo-600">Contact</a>
-              </nav>
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition"
-                title="Toggle Dark Mode"
-              >
-                {darkMode ? "🌙" : "☀️"}
-              </button>
-            </div>
-          </header>
-
-          {/* Hero */}
-          <section className="text-center py-24 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white">
-            <h2 className="text-5xl font-extrabold mb-4">Building High-Quality Roblox Systems</h2>
-            <p className="max-w-xl mx-auto text-lg opacity-90">
-              I specialize in creating scalable, optimized, and engaging gameplay systems for Roblox experiences.
-            </p>
-          </section>
-
-          {/* Projects */}
-          <section id="projects" className="p-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {projects.map((proj) => <Project key={proj.title} {...proj} />)}
-          </section>
-
-          {/* Services */}
-          <section id="services" className="p-10 max-w-5xl mx-auto text-center fade-in">
-            <h2 className="text-3xl font-bold mb-6">Services I Offer</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-2">Custom Systems</h3>
-                <p>From gun mechanics to progression systems, I build efficient frameworks tailored to your game.</p>
-              </div>
-              <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-2">Game Optimization</h3>
-                <p>Performance tuning and code refactoring to ensure smooth gameplay for all devices.</p>
-              </div>
-              <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
-                <h3 className="text-xl font-semibold mb-2">UI & UX Systems</h3>
-                <p>Interactive and modern UI solutions that enhance the player experience.</p>
-              </div>
-            </div>
-          </section>
-
-          {/* About */}
-          <section id="about" className="p-10 max-w-4xl mx-auto text-center fade-in">
-            <h2 className="text-3xl font-bold mb-4">About Me</h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
-              I’ve been scripting in Roblox for 4+ years, focusing on performance, clean code, and creative gameplay systems. 
-              My goal is to help developers bring ambitious projects to life with systems that are both reliable and fun.
-            </p>
-          </section>
-
-          {/* Contact */}
-          <section id="contact" className="p-10 bg-gray-100 dark:bg-gray-800 text-center fade-in">
-            <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-            <p className="text-xl">📩 Discord: <span className="text-indigo-500 font-semibold">noshy556</span></p>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">Let’s discuss your project ideas — I’m available for commissions and collaborations.</p>
-          </section>
-
-          {/* Footer */}
-          <footer className="p-6 text-center text-gray-500 dark:text-gray-400 text-sm">
-            © {new Date().getFullYear()} noshy — Roblox Scripting Portfolio
-          </footer>
+  <script type="text/babel" data-presets="env,react">
+    (() => {
+      const Project = ({ title, description, highlight, link }) => (
+        <div className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition rounded-2xl p-6 fade-in">
+          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+          <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">{description}</p>
+          {highlight && <p className="text-xs font-bold text-indigo-500 mb-4">✨ {highlight}</p>}
+          {link ? (
+            <a
+              href={link}
+              className="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Showcase
+            </a>
+          ) : (
+            <span className="inline-block px-4 py-2 bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed">
+              Demo Unavailable
+            </span>
+          )}
         </div>
       );
-    };
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
+      const SkillCard = ({ name, desc }) => (
+        <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6">
+          <p className="font-semibold mb-2">{name}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{desc}</p>
+        </div>
+      );
+
+      const App = () => {
+        const [darkMode, setDarkMode] = React.useState(localStorage.getItem("theme") === "dark");
+
+        React.useEffect(() => {
+          if (darkMode) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+          }
+        }, [darkMode]);
+
+        // Projects are personal demos / commission examples. No claims about external groups or paid clients are made here.
+        const projects = [
+          { title: "TPS Gun System", description: "Third-person weapon framework with smooth animations and modular hooks for expansion.", highlight: "Personal demo / prototype", link: "" },
+          { title: "Payload Framework", description: "Objective-based payload mechanics with simple AI pathing examples.", highlight: "Personal demo / prototype", link: "https://youtu.be/0msNi_Xs4qg" },
+          { title: "Rally System", description: "Squad-like deployment UI & basic matchmaking flow implemented as a demo.", highlight: "Personal demo / prototype", link: "https://youtu.be/lapJBFa7LLY" },
+          { title: "Custom Duels Arena", description: "Configurable PvP arena demo with queueing and match rules.", highlight: "Personal demo / prototype", link: "" },
+          { title: "Custom Roblox Chat", description: "Chat UI demo showing role tags and moderation stubs.", highlight: "Personal demo / prototype", link: "https://youtu.be/W1BtIkhCG98" },
+          { title: "Placement System", description: "Building & placement demo using grid-snapping and validation logic.", highlight: "Personal demo / prototype", link: "https://youtu.be/CJ0tCs2MZ8w" },
+        ];
+
+        // Clear, truthful skills section instead of fabricated testimonials.
+        const skills = [
+          { name: 'Lua & Roblox Studio', desc: 'Scripting gameplay systems, RemoteEvents, and data flow.' },
+          { name: 'Server-Client Architecture', desc: 'Designing safe server-side logic and efficient client prediction.' },
+          { name: 'Optimization', desc: 'Profiling scripts and reducing lag for smoother play.' },
+          { name: 'UI Systems', desc: 'Building modular UIs and HUDs for player interactions.' },
+        ];
+
+        return (
+          <div>
+            {/* Header */}
+            <header className="p-6 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center transition">
+              <h1 className="text-2xl font-bold">noshy — Roblox Scripting Portfolio</h1>
+              <div className="flex gap-6 items-center">
+                <nav className="flex gap-4">
+                  <a href="#projects" className="hover:text-indigo-600">Projects</a>
+                  <a href="#services" className="hover:text-indigo-600">Services</a>
+                  <a href="#skills" className="hover:text-indigo-600">Skills</a>
+                  <a href="#about" className="hover:text-indigo-600">About</a>
+                  <a href="#contact" className="hover:text-indigo-600">Contact</a>
+                </nav>
+                <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition" title="Toggle Dark Mode">
+                  {darkMode ? "🌙" : "☀️"}
+                </button>
+              </div>
+            </header>
+
+            {/* Hero */}
+            <section className="text-center py-24 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white">
+              <h2 className="text-5xl font-extrabold mb-4">Roblox Scripts & Demos</h2>
+              <p className="max-w-xl mx-auto text-lg opacity-90">
+                I build personal Roblox scripting projects and accept commissions. I focus on clean, maintainable code and reliable systems.
+              </p>
+              <a href="#contact" className="mt-6 inline-block px-6 py-3 bg-white text-indigo-600 font-bold rounded-xl shadow-lg hover:scale-105 transition">💼 Hire Me</a>
+            </section>
+
+            {/* Projects */}
+            <section id="projects" className="p-10 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {projects.map((proj) => <Project key={proj.title} {...proj} />)}
+            </section>
+
+            {/* Services */}
+            <section id="services" className="p-10 max-w-5xl mx-auto text-center fade-in">
+              <h2 className="text-3xl font-bold mb-6">Services I Offer</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-2">Custom Systems</h3>
+                  <p>From weapon mechanics to progression systems, I build modular frameworks you can integrate into your game.</p>
+                </div>
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-2">Performance & Optimization</h3>
+                  <p>Script profiling and refactors to improve stability and reduce lag on common devices.</p>
+                </div>
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+                  <h3 className="text-xl font-semibold mb-2">UI & UX Systems</h3>
+                  <p>HUDs, menus, and in-game interfaces designed to be modular and easy to skin.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* Skills (replaces testimonials) */}
+            <section id="skills" className="p-10 max-w-5xl mx-auto text-center fade-in">
+              <h2 className="text-3xl font-bold mb-6">Skills</h2>
+              <div className="grid md:grid-cols-4 gap-6">
+                {skills.map((s) => <SkillCard key={s.name} name={s.name} desc={s.desc} />)}
+              </div>
+            </section>
+
+            {/* About */}
+            <section id="about" className="p-10 max-w-4xl mx-auto text-center fade-in">
+              <h2 className="text-3xl font-bold mb-4">About Me</h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300">
+                I create Roblox scripts as personal projects and for commission work. I prefer to be transparent about what I can deliver — if there's something specific you need, tell me and I’ll provide a clear timeline and a demo or proof-of-concept.
+              </p>
+            </section>
+
+            {/* Contact */}
+            <section id="contact" className="p-10 bg-gray-100 dark:bg-gray-800 text-center fade-in">
+              <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
+              <p className="text-xl">📩 Discord: <a href="https://discordapp.com/users/noshy556" className="text-indigo-500 font-semibold hover:underline">noshy556</a></p>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">I’m available for commissions. If you contact me, please describe your project idea and your budget.</p>
+            </section>
+
+            {/* Footer */}
+            <footer className="p-6 text-center text-gray-500 dark:text-gray-400 text-sm">
+              © {new Date().getFullYear()} noshy — Roblox Scripting Portfolio
+            </footer>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    })();
   </script>
 </body>
 </html>
